@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 
+//array size
 #define STEPS 1000000000
 #define STEP_SIZE 1.0/STEPS
 
@@ -23,20 +24,28 @@ double calculate_pi()
 
 }
 
+
+int64_t millis()
+{
+    struct timespec now;
+    timespec_get(&now, TIME_UTC);
+    return ((int64_t) now.tv_sec) * 1000 + ((int64_t) now.tv_nsec) / 1000000;
+}
+
 int main()
     {
         //calculating time taken
-        clock_t start = (double) clock();
+        int64_t start = millis();
         double sum = calculate_pi();
-        clock_t end = (double) clock();
+        int64_t end = millis();
 
         printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
         printf("Difference to Reference is %.10lf\n", M_PI - sum);
-        
-//divide by CLOCKS_PER_SEC to et time in sec
 
-        double time_elapsed = (end - start)/CLOCKS_PER_SEC;
-        printf("Time: %f\n", time_elapsed);
+//getting time elapsed in ms
+
+        double time_elapsed = (end - start);
+        printf("Time: %f ms\n", time_elapsed);
 
     }
 

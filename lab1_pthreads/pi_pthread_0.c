@@ -4,7 +4,7 @@
 #include <pthread.h>
 #include <time.h>
 
-
+//array size
 #define STEPS 1000000000
 #define STEP_SIZE 1.0/STEPS
 #define THREADS 3
@@ -32,6 +32,13 @@ void * pi_thread(void *ptr)
 	return NULL;
 }
 
+int64_t millis()
+{
+    struct timespec now;
+    timespec_get(&now, TIME_UTC);
+    return ((int64_t) now.tv_sec) * 1000 + ((int64_t) now.tv_nsec) / 1000000;
+}
+
 void main()
 {
 	long num_threads = 2;
@@ -43,7 +50,7 @@ void main()
 	thread_arg = malloc((unsigned long)num_threads * sizeof(*thread_arg));
 
     //calculating time taken
-        time_t start = clock();
+        int64_t start = millis();
 
 	for (int i = 0; i < num_threads; i++)
 	{
@@ -58,11 +65,11 @@ void main()
 		sum += 4 * thread_arg[i].local_sum;
 	}
 
-    clock_t end = clock();
+        int64_t end = millis();
 
 	printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
 	printf("Difference to Reference is %.10lf\n", M_PI - sum);
 
-	double time_elapsed = (end - start)/CLOCKS_PER_SEC;
-    printf("Time: %f\n", time_elapsed);
+	double time_elapsed = (end - start);
+    printf("Time: %f ms\n ", time_elapsed);
 }
