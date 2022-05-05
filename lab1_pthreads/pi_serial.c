@@ -4,7 +4,7 @@
 #include <time.h>
 
 //array size
-#define STEPS 1000000000
+#define STEPS 100000000
 #define STEP_SIZE 1.0/STEPS
 
 double calculate_pi()
