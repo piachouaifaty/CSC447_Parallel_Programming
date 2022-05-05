@@ -46,7 +46,6 @@ int main()
 
         double time_elapsed = (end - start);
         printf("Time: %f ms\n", time_elapsed);
-
     }
 
 
