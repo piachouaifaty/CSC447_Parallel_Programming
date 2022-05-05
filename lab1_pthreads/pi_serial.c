@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #define STEPS 1000000000
 #define STEP_SIZE 1.0/STEPS
@@ -23,10 +24,18 @@ double calculate_pi()
 }
 
 int main()
-{
+    {
+        //calculating time taken
+        clock_t start = (double) clock();
+        double sum = calculate_pi();
+        clock_t end = (double) clock();
+
+        printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
+        printf("Difference to Reference is %.10lf\n", M_PI - sum);
+
+        double time_elapsed = (end - start);
+        printf("Time: %lu\n", time_elapsed);
+
+    }
 
 
-
-
-
-}
