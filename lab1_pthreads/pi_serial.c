@@ -32,8 +32,10 @@ int main()
 
         printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
         printf("Difference to Reference is %.10lf\n", M_PI - sum);
+        
+//divide by CLOCKS_PER_SEC to et time in sec
 
-        double time_elapsed = (end - start);
+        double time_elapsed = (end - start)/CLOCKS_PER_SEC;
         printf("Time: %f\n", time_elapsed);
 
     }

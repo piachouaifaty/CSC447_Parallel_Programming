@@ -43,7 +43,7 @@ void main()
 	thread_arg = malloc((unsigned long)num_threads * sizeof(*thread_arg));
 
     //calculating time taken
-        clock_t start = (double) clock();
+        time_t start = clock();
 
 	for (int i = 0; i < num_threads; i++)
 	{
@@ -58,11 +58,11 @@ void main()
 		sum += 4 * thread_arg[i].local_sum;
 	}
 
-    clock_t end = (double) clock();
+    clock_t end = clock();
 
 	printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
 	printf("Difference to Reference is %.10lf\n", M_PI - sum);
 
-	double time_elapsed = (end - start);
+	double time_elapsed = (end - start)/CLOCKS_PER_SEC;
     printf("Time: %f\n", time_elapsed);
 }
