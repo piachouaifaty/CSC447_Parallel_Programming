@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
+#include <time.h>
+
 
 #define STEPS 1000000000
 #define STEP_SIZE 1.0/STEPS
@@ -40,6 +42,9 @@ void main()
 	thread = malloc((unsigned long)num_threads * sizeof(*thread));
 	thread_arg = malloc((unsigned long)num_threads * sizeof(*thread_arg));
 
+    //calculating time taken
+        clock_t start = (double) clock();
+
 	for (int i = 0; i < num_threads; i++)
 	{
 		thread_arg[i].lower = (i+0) * (1.0 / (double)num_threads);
@@ -53,6 +58,11 @@ void main()
 		sum += 4 * thread_arg[i].local_sum;
 	}
 
+    clock_t end = (double) clock();
+
 	printf("Reference PI = %.10lf Computed PI = %.10lf\n", M_PI, sum);
 	printf("Difference to Reference is %.10lf\n", M_PI - sum);
+
+	double time_elapsed = (end - start);
+    printf("Time: %f\n", time_elapsed);
 }

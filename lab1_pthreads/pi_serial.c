@@ -34,7 +34,7 @@ int main()
         printf("Difference to Reference is %.10lf\n", M_PI - sum);
 
         double time_elapsed = (end - start);
-        printf("Time: %lu\n", time_elapsed);
+        printf("Time: %f\n", time_elapsed);
 
     }
 
